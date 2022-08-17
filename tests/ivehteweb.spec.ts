@@ -5,7 +5,7 @@ test.describe.only("Test Ivehte Web", () => {
    * Authentification
    */
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://staging-ivehte-dev.madait-lab.com/login");
+    await page.goto("http://localhost:3000/login");
     /****** Début Autentification ******/
     await page
       .locator('[placeholder="Entrez votre nom d\\\'utilisateur"]')
@@ -16,7 +16,7 @@ test.describe.only("Test Ivehte Web", () => {
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     const connexion = page.locator("text=Se connecter").first();
     await Promise.all([
-      //page.waitForNavigation(/*{ url: 'https://staging-ivehte-dev.madait-lab.com/login' }*/),
+      //page.waitForNavigation(/*{ url: 'http://localhost:3000/login' }*/),
       connexion.click(),
       expect(page.locator("text=Mes patients du jour").first()).toBeVisible(),
     ]);
@@ -59,12 +59,12 @@ test.describe.only("Test Ivehte Web", () => {
 
   test("Créer un évenement", async ( {page} ) => {
     /****** Début Test Créer événement ******/
-    await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
+    await page.goto('http://localhost:3000/dashboard');
     const ongletAgenda = page.locator("text=Mon agenda").first();
     const addEven = page.locator("text=Créer un événement").first();
     // Cliquer sur Mon agenda
     await Promise.all([
-      // page.waitForNavigation(/*{ url: 'https://staging-ivehte-dev.madait-lab.com/dashboard' }*/),
+      // page.waitForNavigation(/*{ url: 'http://localhost:3000/dashboard' }*/),
       ongletAgenda.click(),
       expect(page.locator(`text=Planning`).first()).toBeVisible(),
       addEven.click(),
@@ -130,7 +130,7 @@ test.describe.only("Test Ivehte Web", () => {
 
   test("Add patient", async ({ page }) => {
     /** Début ajout patient */
-    await page.goto('https://staging-ivehte-dev.madait-lab.com/patients/add');
+    await page.goto('http://localhost:3000/patients/add');
     await page.locator('input[type="radio"]').first().check();
     await page.locator('input[type="radio"]').nth(1).check();
     await page.locator('[placeholder="Tapez le nom de naissance"]').click();
@@ -160,7 +160,7 @@ test.describe.only("Test Ivehte Web", () => {
    * Vérification doublon patient
    */
   test("Vérification doublon patient", async ({ page }) => {
-    await page.goto('https://staging-ivehte-dev.madait-lab.com/patients/add');
+    await page.goto('http://localhost:3000/patients/add');
     await page.locator('input[type="radio"]').first().check();
     await page.locator('input[type="radio"]').nth(1).check();
     await page.locator('[placeholder="Tapez le nom de naissance"]').click();
@@ -188,7 +188,7 @@ test.describe.only("Test Ivehte Web", () => {
 
   test("Contacter un patient", async ({ page }) => {
     /** Début contacter patient */
-    await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
+    await page.goto('http://localhost:3000/dashboard');
     await page.locator('#root ul[role="menu"] >> text=Patients').click();
     await page.locator('[placeholder="Rechercher"]').click();
     await page.keyboard.type("TEST CI 2 CD TEST 2");
@@ -203,7 +203,7 @@ test.describe.only("Test Ivehte Web", () => {
 
   test("Modifier un patient", async( {page} ) => {
     /** Debut modifier patient */
-    await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
+    await page.goto('http://localhost:3000/dashboard');
     await page.locator('#root ul[role="menu"] >> text=Patients').click();
     await page.locator('[placeholder="Rechercher"]').click();
     await page.keyboard.type("TEST CI 2 CD TEST 2");
@@ -217,7 +217,7 @@ test.describe.only("Test Ivehte Web", () => {
   })
 
   // test("Modifier observation", async( {page} ) => {
-  //   await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
+  //   await page.goto('http://localhost:3000/dashboard');
   //   await page.locator('#root ul[role="menu"] >> text=Patients').click();
   //   await page.locator('li[role="menuitem"]:has-text("OBSERVATIONS")').click();
   //   await page.locator('text=Non in omnis ad et ipsa.Psychologique').click();
@@ -229,7 +229,7 @@ test.describe.only("Test Ivehte Web", () => {
   // })
 
   test("Ajout HDJ", async( {page} ) => {
-    await page.goto('https://staging-ivehte-dev.madait-lab.com/hdj/new');
+    await page.goto('http://localhost:3000/hdj/new');
     await page.locator('[placeholder="Tapez le nom de l\\\'HDJ"]').click();
     await page.keyboard.type("TEST CICD");
     // await page.locator('.MuiGrid-root > .MuiInputBase-root').click();
@@ -239,7 +239,7 @@ test.describe.only("Test Ivehte Web", () => {
   })
 
   test("Modifier un HDJ", async( {page} ) => {
-    await page.goto('https://staging-ivehte-dev.madait-lab.com/hdj');
+    await page.goto('http://localhost:3000/hdj');
     await page.locator('[placeholder="Rechercher une HDJ"]').click();
     await page.keyboard.type("HDJ");
     // await page.pause();
@@ -261,7 +261,7 @@ test.describe.only("Test Ivehte Web", () => {
   })
 
   // test("Créer un programme", async( {page} ) => {
-  //   await page.goto('https://staging-ivehte-dev.madait-lab.com/dashboard');
+  //   await page.goto('http://localhost:3000/dashboard');
   //   await page.locator('#root >> text=Programmes').click();
   //   await page.locator('button:has-text("créer un nouveau programme")').click();
   //   await page.locator('text=Cliquer pour modifier l\'icône.Sélectionnez un niveau >> [data-testid="KeyboardArrowDownIcon"]').click();
@@ -284,7 +284,7 @@ test.describe.only("Test Ivehte Web", () => {
   // })
 
   // test("Modifier un programme", async( { page } ) => {
-  //   await page.goto('https://staging-ivehte-dev.madait-lab.com/programmes');
+  //   await page.goto('http://localhost:3000/programmes');
   //   await page.locator('text=GESTION DU PROGRAMME').first().click();
   //   await page.locator('button:has-text("Modifier le programme")').click();
   //   await page.locator('[placeholder="Tapez le nom du programme"]').click();
@@ -294,7 +294,7 @@ test.describe.only("Test Ivehte Web", () => {
   // })
 
   test("Filtrage programme", async ({ page }) => {
-    await page.goto('https://staging-ivehte-dev.madait-lab.com/programmes');
+    await page.goto('http://localhost:3000/programmes');
     await page.locator('#Diab_te').check();
     await page.locator('#Diab_te').uncheck();
     await page.locator('#Initial').check();
