@@ -5,7 +5,7 @@ test.describe.only("Test Ivehte Web", () => {
    * Authentification
    */
   test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:3000/login");
+    await page.goto("https://staging-ivehte-dev.madait-lab.com//login");
     /****** Début Autentification ******/
     await page
       .locator('[placeholder="Entrez votre nom d\\\'utilisateur"]')
